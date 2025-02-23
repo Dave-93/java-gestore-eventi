@@ -75,6 +75,13 @@ public class Evento {
         }
     }
 
+    //Prenotazione multipla
+    public void prenotazioniMultiple(int numeroPrenotazioni) {
+        for(int i = 0; i < numeroPrenotazioni; i++) {
+               prenota();//richiamo il metodo n volte ed così da fare l'inserimento e tutti i controlli necessari
+        }
+    }
+
     //Disdetta
     public void disdici(){
         //todo "Gestisco già "un’eccezione" (su controlloData e controlloPosti) che bloccano l'esecuzione del codice a monte se la data è passata o se non ci sono posti. Di conseguenza posso prenotare/disdire solo se DATA e POSTI sono corretti
@@ -88,6 +95,13 @@ public class Evento {
             }
         }catch (IllegalArgumentException e){
             System.out.println(String.format("Tutti i posti sono liberi, disponibili %d posti", numeroPostiTotale));
+        }
+    }
+
+     //Disdetta multipla
+     public void disdetteMultiple(int numeroPrenotazioni){
+        for(int i = 0; i < numeroPrenotazioni; i++) {
+            disdici();
         }
     }
 
