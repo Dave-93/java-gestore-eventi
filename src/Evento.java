@@ -54,7 +54,7 @@ public class Evento {
         if(numeroPostiTotale <= 0){
             throw new IllegalArgumentException("Posti assenti");
         }else{
-            System.out.println(String.format("Puoi procedere alla prenotazione per l'evento %s", titolo));
+            System.out.println(String.format("Puoi procedere con la prenotazione di %s", titolo));
         }
     }
 

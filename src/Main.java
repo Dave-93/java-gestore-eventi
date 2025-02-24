@@ -18,18 +18,20 @@ public class Main {
         int numeroPostiTotale = scan.nextInt();
 
         try {
-            Evento prova = new Evento(titolo, data, numeroPostiTotale);
+            Evento eventoBase = new Evento(titolo, data, numeroPostiTotale);
             
             //Prenotazione singola
             System.out.println("Vuoi prenotare un posto? Digita 1 per SI o 0 per NO");
             int prenotazioneSingola = scan.nextInt();
             switch (prenotazioneSingola) {
-                case 0: System.out.println("Nessuna prenotazione effettuata");   
+                case 0:
+                    System.out.println("Nessuna prenotazione effettuata");   
                     break;
-                case 1: prova.prenota();
+                case 1:
+                    eventoBase.prenota();
                     break;
                 default:
-                    System.out.println("Scelta errata");;
+                    System.out.println("Scelta errata");
             }
             //Prenotazione multipla
             System.out.println("Vuoi prenotare più posti? Digita 1 per SI o 0 per NO");
@@ -41,7 +43,7 @@ public class Main {
                 case 1:
                     System.out.println("Quanti posti vuoi aggiungere alla prenotazione?");
                     int prenotazioneMultipla = scan.nextInt();
-                    prova.prenotazioniMultiple(prenotazioneMultipla);
+                    eventoBase.prenotazioniMultiple(prenotazioneMultipla);
                     break;
                 default:
                     System.out.println("Scelta errata");//todo eccezione!!!
@@ -51,9 +53,11 @@ public class Main {
             System.out.println("Vuoi disdire un posto? Digita 1 per SI o 0 per NO");
             int disdettaSingola = scan.nextInt();
             switch (disdettaSingola) {
-                case 0: System.out.println("Nessuna disdetta effettuata");   
+                case 0:
+                    System.out.println("Nessuna disdetta effettuata");   
                     break;
-                case 1: prova.disdici();
+                case 1:
+                    eventoBase.disdici();
                     break;
                 default:
                     System.out.println("Scelta errata");
@@ -68,14 +72,14 @@ public class Main {
                 case 1:
                     System.out.println("Quanti posti vuoi rimuovere dalla prenotazione?");
                     int disdettaMultipla = scan.nextInt();
-                    prova.disdetteMultiple(disdettaMultipla);
+                    eventoBase.disdetteMultiple(disdettaMultipla);
                     break;
                 default:
                     System.out.println("Scelta errata");//todo eccezione!!!
                     break;
             }
             //Stampa data - titolo     
-            System.out.println(prova);
+            System.out.println(eventoBase);
         } catch (IllegalArgumentException e) {
             switch (e.getMessage()) {
                 case "Data passata":
