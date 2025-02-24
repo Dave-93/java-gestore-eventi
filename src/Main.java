@@ -34,14 +34,18 @@ public class Main {
             //Prenotazione multipla
             System.out.println("Vuoi prenotare più posti? Digita 1 per SI o 0 per NO");
             int rispostaPrenotazione = scan.nextInt();
-            if(rispostaPrenotazione == 0){
-                System.out.println("Nessuna prenotazione aggiuntiva effettuata");
-            }else if(rispostaPrenotazione == 1){
-                System.out.println("Quanti posti vuoi aggiungere alla prenotazione?");
-                int prenotazioneMultipla = scan.nextInt();
-                prova.prenotazioniMultiple(prenotazioneMultipla);
-            }else{
-                System.out.println("Scelta errata");//todo eccezione!!!
+            switch (rispostaPrenotazione) {
+                case 0:
+                    System.out.println("Nessuna prenotazione aggiuntiva effettuata");
+                    break;
+                case 1:
+                    System.out.println("Quanti posti vuoi aggiungere alla prenotazione?");
+                    int prenotazioneMultipla = scan.nextInt();
+                    prova.prenotazioniMultiple(prenotazioneMultipla);
+                    break;
+                default:
+                    System.out.println("Scelta errata");//todo eccezione!!!
+                    break;
             }
             //Disdetta singola
             System.out.println("Vuoi disdire un posto? Digita 1 per SI o 0 per NO");
@@ -57,14 +61,18 @@ public class Main {
             //Disdetta multipla
             System.out.println("Vuoi disdire più posti? Digita 1 per SI o 0 per NO");
             int rispostaDisdetta = scan.nextInt();
-            if(rispostaDisdetta == 0){
-                System.out.println("Nessuna disdetta aggiuntiva effettuata");
-            }else if(rispostaDisdetta == 1){
-                System.out.println("Quanti posti vuoi rimuovere dalla prenotazione?");
-                int disdettaMultipla = scan.nextInt();
-                prova.disdetteMultiple(disdettaMultipla);
-            }else{
-                System.out.println("Scelta errata");//todo eccezione!!!
+            switch (rispostaDisdetta) {
+                case 0:
+                    System.out.println("Nessuna disdetta aggiuntiva effettuata");
+                    break;
+                case 1:
+                    System.out.println("Quanti posti vuoi rimuovere dalla prenotazione?");
+                    int disdettaMultipla = scan.nextInt();
+                    prova.disdetteMultiple(disdettaMultipla);
+                    break;
+                default:
+                    System.out.println("Scelta errata");//todo eccezione!!!
+                    break;
             }
             //Stampa data - titolo     
             System.out.println(prova);

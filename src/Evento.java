@@ -28,7 +28,6 @@ public class Evento {
         return numeroPostiTotale;
     }
     public int getNumeroPostiPrenotati() {
-        System.out.println("i posti prenotati sono " + numeroPostiPrenotati);
         return numeroPostiPrenotati;
     }
 
