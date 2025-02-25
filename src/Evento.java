@@ -6,7 +6,7 @@ public class Evento {
     //Attributi
     private String titolo;
     private LocalDate data;
-    private final int numeroPostiTotale;
+    private final int numeroPostiTotale;//con FINAL essere assegnato solo una volta(nel costruttore) e non può più essere modificato
     private int numeroPostiPrenotati;
 
     //Setters
@@ -14,6 +14,7 @@ public class Evento {
         this.titolo = titolo;
     }
     public void setData(LocalDate data) {
+        controlloData(data);//mi assicuro che se la data viene modificata dopo la creazione dell'oggetto non può essere antecedente
         this.data = data;
     }
 
@@ -37,13 +38,13 @@ public class Evento {
         this.data = data;
         this.numeroPostiTotale = numeroPostiTotale;
         this.numeroPostiPrenotati = 0;
-        controlloData();
+        controlloData(data);
         controlloPosti(numeroPostiTotale);
     }
 
     //Metodi
     //Gestione data
-    private void controlloData () /*throws IllegalArgumentException*/{//essendo unchecked può NON essere dichiarato
+    private void controlloData (LocalDate data) /*throws IllegalArgumentException*/{//essendo unchecked può NON essere dichiarato
         if(data.isBefore(LocalDate.now())){
             throw new IllegalArgumentException("Data passata");
         }
