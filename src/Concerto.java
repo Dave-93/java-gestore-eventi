@@ -44,12 +44,12 @@ public class Concerto extends Evento{
 
     //Prezzo formattato
     private String formattaPrezzo(){
-        String prezzoFormattato = String.format("%.2f", prezzo).replace(".", ",");
+        String prezzoFormattato = String.format("%.2f \u20AC", prezzo).replace(".", ",");
         return prezzoFormattato;
     }
 
     @Override
     public String toString() {
-        return formattaDataOra() + " - " + getTitolo() + " - " /* prezzo formattato */;
+        return formattaDataOra() + " - " + getTitolo() + " - " + formattaPrezzo();
     }
 }

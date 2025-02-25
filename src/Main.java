@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
@@ -18,7 +19,28 @@ public class Main {
         int numeroPostiTotale = scan.nextInt();
 
         try {
-            Evento eventoBase = new Evento(titolo, data, numeroPostiTotale);
+            //Scelta per creazione oggetto
+            System.out.println("Si tratta di un evento base o di un concerto? Digita 1 per EVENTO BASE o 2 per CONCERTO");
+            int sceltaEvento = scan.nextInt();
+            Evento evento = null;
+            if(sceltaEvento == 1){
+                //Oggetto Evento
+                evento = new Evento(titolo, data, numeroPostiTotale);
+            }else if(sceltaEvento == 2){
+                //Ora
+                System.out.println("Inserisci l'orario del concerto (formato ora HH:mm)");
+                scan.nextLine();
+                String oraInput = scan.nextLine();
+                DateTimeFormatter formatOra = DateTimeFormatter.ofPattern("HH:mm");
+                LocalTime ora = LocalTime.parse(oraInput, formatOra);
+                //Prezzo
+                System.out.println("Inserisci il prezzo del biglietto");
+                float prezzo = scan.nextFloat();
+                //Oggetto Concerto
+                evento = new Concerto(titolo, data, numeroPostiTotale, ora, prezzo);
+            }else{
+                throw new IllegalArgumentException("Evento non disponibile");
+            }
             
             //Prenotazione singola
             System.out.println("Vuoi prenotare un posto? Digita 1 per SI o 0 per NO");
@@ -28,7 +50,7 @@ public class Main {
                     System.out.println("Nessuna prenotazione effettuata");   
                     break;
                 case 1:
-                    eventoBase.prenota();
+                    evento.prenota();
                     break;
                 default:
                     System.out.println("Scelta errata");
@@ -43,7 +65,7 @@ public class Main {
                 case 1:
                     System.out.println("Quanti posti vuoi aggiungere alla prenotazione?");
                     int prenotazioneMultipla = scan.nextInt();
-                    eventoBase.prenotazioniMultiple(prenotazioneMultipla);
+                    evento.prenotazioniMultiple(prenotazioneMultipla);
                     break;
                 default:
                     System.out.println("Scelta errata");//todo eccezione!!!
@@ -57,7 +79,7 @@ public class Main {
                     System.out.println("Nessuna disdetta effettuata");   
                     break;
                 case 1:
-                    eventoBase.disdici();
+                    evento.disdici();
                     break;
                 default:
                     System.out.println("Scelta errata");
@@ -72,14 +94,14 @@ public class Main {
                 case 1:
                     System.out.println("Quanti posti vuoi rimuovere dalla prenotazione?");
                     int disdettaMultipla = scan.nextInt();
-                    eventoBase.disdetteMultiple(disdettaMultipla);
+                    evento.disdetteMultiple(disdettaMultipla);
                     break;
                 default:
                     System.out.println("Scelta errata");//todo eccezione!!!
                     break;
             }
             //Stampa data - titolo     
-            System.out.println(eventoBase);
+            System.out.println(evento);
         } catch (IllegalArgumentException e) {
             switch (e.getMessage()) {
                 case "Data passata":
