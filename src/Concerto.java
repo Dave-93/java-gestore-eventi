@@ -44,7 +44,7 @@ public class Concerto extends Evento{
 
     //Prezzo formattato
     private String formattaPrezzo(){
-        String prezzoFormattato = String.format("%.2f \u20AC", prezzo).replace(".", ",");
+        String prezzoFormattato = String.format("%.2f\u20AC", prezzo).replace(".", ",");
         return prezzoFormattato;
     }
 

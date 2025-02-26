@@ -61,8 +61,6 @@ public class Evento {
 
     //Prenotazione
     public void prenota(){
-        //todo "Gestisco già "un’eccezione" (su controlloData e controlloPosti) che bloccano l'esecuzione del codice a monte se la data è passata o se non ci sono posti. Di conseguenza posso prenotare/disdire solo se DATA e POSTI sono corretti
-        //*Gestendo l'eccezione direttamente nel metodo non blocca l'esecuzione del programma
         try{
             if(numeroPostiPrenotati >= numeroPostiTotale){
                 throw new IllegalArgumentException();
@@ -84,8 +82,6 @@ public class Evento {
 
     //Disdetta
     public void disdici(){
-        //todo "Gestisco già "un’eccezione" (su controlloData e controlloPosti) che bloccano l'esecuzione del codice a monte se la data è passata o se non ci sono posti. Di conseguenza posso prenotare/disdire solo se DATA e POSTI sono corretti
-        //*Gestendo l'eccezione direttamente nel metodo non blocca l'esecuzione del programma
         try{
             if(numeroPostiPrenotati <= 0){
                 throw new IllegalArgumentException();

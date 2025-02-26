@@ -4,6 +4,22 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class Main {
+
+    private static int controlloScelta(Scanner scan, String messaggio){
+        int scelta;
+        do {
+            System.out.println(messaggio);
+            while (!scan.hasNextInt()) { //while per verificare se l'input è un int
+                System.out.println("Scelta errata. Inserisci un numero valido (1 per SI, 0 per NO)");
+                scan.next(); // Scarta l'input errato
+            }
+            scelta = scan.nextInt();
+            if (scelta != 0 && scelta != 1) {
+                System.out.println("Scelta errata. Riprova.");
+            }
+        } while (scelta != 0 && scelta != 1);//il ciclo si ripete finchè non scelgo 0 o 1
+        return scelta;
+    }
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         //Nome
@@ -43,64 +59,52 @@ public class Main {
             }
             
             //Prenotazione singola
-            System.out.println("Vuoi prenotare un posto? Digita 1 per SI o 0 per NO");
-            int prenotazioneSingola = scan.nextInt();
-            switch (prenotazioneSingola) {
-                case 0:
-                    System.out.println("Nessuna prenotazione effettuata");   
-                    break;
-                case 1:
-                    evento.prenota();
-                    break;
-                default:
-                    System.out.println("Scelta errata");
+            if(controlloScelta(scan, "Vuoi prenotare un posto? Digita 1 per SI o 0 per NO") == 1){
+                evento.prenota();
+            }else{
+                System.out.println("Nessuna prenotazione effettuata");
             }
             //Prenotazione multipla
-            System.out.println("Vuoi prenotare più posti? Digita 1 per SI o 0 per NO");
-            int rispostaPrenotazione = scan.nextInt();
-            switch (rispostaPrenotazione) {
-                case 0:
-                    System.out.println("Nessuna prenotazione aggiuntiva effettuata");
-                    break;
-                case 1:
+            if(controlloScelta(scan, "Vuoi prenotare più posti? Digita 1 per SI o 0 per NO") == 1){
+                try {
                     System.out.println("Quanti posti vuoi aggiungere alla prenotazione?");
-                    int prenotazioneMultipla = scan.nextInt();
-                    evento.prenotazioniMultiple(prenotazioneMultipla);
-                    break;
-                default:
-                    System.out.println("Scelta errata");//todo eccezione!!!
-                    break;
+                    if(!scan.hasNextInt()){
+                        scan.next();
+                        throw new IllegalArgumentException();
+                    }else{
+                        int prenotazioneMultipla = scan.nextInt();
+                        evento.prenotazioniMultiple(prenotazioneMultipla);
+                    }
+                } catch (Exception e) {
+                    System.err.println("Valore non corretto");
+                }
+            }else{
+                System.out.println("Nessuna prenotazione aggiuntiva effettuata");
             }
             //Disdetta singola
-            System.out.println("Vuoi disdire un posto? Digita 1 per SI o 0 per NO");
-            int disdettaSingola = scan.nextInt();
-            switch (disdettaSingola) {
-                case 0:
-                    System.out.println("Nessuna disdetta effettuata");   
-                    break;
-                case 1:
-                    evento.disdici();
-                    break;
-                default:
-                    System.out.println("Scelta errata");
+            if(controlloScelta(scan, "Vuoi disdire un posto? Digita 1 per SI o 0 per NO") == 1){
+                evento.disdici();
+            }else{
+                System.out.println("Nessuna disdetta effettuata");
             }
             //Disdetta multipla
-            System.out.println("Vuoi disdire più posti? Digita 1 per SI o 0 per NO");
-            int rispostaDisdetta = scan.nextInt();
-            switch (rispostaDisdetta) {
-                case 0:
-                    System.out.println("Nessuna disdetta aggiuntiva effettuata");
-                    break;
-                case 1:
-                    System.out.println("Quanti posti vuoi rimuovere dalla prenotazione?");
-                    int disdettaMultipla = scan.nextInt();
-                    evento.disdetteMultiple(disdettaMultipla);
-                    break;
-                default:
-                    System.out.println("Scelta errata");//todo eccezione!!!
-                    break;
+            if(controlloScelta(scan, "Vuoi disdire più posti? Digita 1 per SI o 0 per NO") == 1){
+                try {
+                    System.out.println("Quanti posti vuoi aggiungere alla prenotazione?");
+                    if(!scan.hasNextInt()){
+                        scan.next();
+                        throw new IllegalArgumentException();
+                    }else{
+                        int disdettaMultipla = scan.nextInt();
+                        evento.disdetteMultiple(disdettaMultipla);
+                    }
+                } catch (Exception e) {
+                    System.err.println("Valore non corretto");
+                }
+            }else{
+                System.out.println("Nessuna disdetta aggiuntiva effettuata");
             }
-            //Stampa data - titolo     
+            //Stampa data - titolo  || dataora - titolo - prezzo   
             System.out.println(evento);
         } catch (IllegalArgumentException e) {
             switch (e.getMessage()) {
@@ -109,6 +113,9 @@ public class Main {
                 break;
             case "Posti assenti":
                 System.err.println(String.format("Mi dispiace, non ci sono più posti per l'evento %s", titolo));
+                break;
+            case "Evento non disponibile":
+                System.err.println("Mi dispiace ma non è presente questa tipologia di evento");
                 break;
             }
         }finally{
