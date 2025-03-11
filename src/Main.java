@@ -75,7 +75,7 @@ public class Main {
                         int prenotazioneMultipla = scan.nextInt();
                         evento.prenotazioniMultiple(prenotazioneMultipla);
                     }
-                } catch (Exception e) {
+                } catch (IllegalArgumentException e) {
                     System.err.println("Valore non corretto");
                 }
             }else{
@@ -90,7 +90,7 @@ public class Main {
             //Disdetta multipla
             if(controlloScelta(scan, "Vuoi disdire più posti? Digita 1 per SI o 0 per NO") == 1){
                 try {
-                    System.out.println("Quanti posti vuoi aggiungere alla prenotazione?");
+                    System.out.println("Quanti posti vuoi disdire dalla prenotazione?");
                     if(!scan.hasNextInt()){
                         scan.next();
                         throw new IllegalArgumentException();
@@ -98,7 +98,7 @@ public class Main {
                         int disdettaMultipla = scan.nextInt();
                         evento.disdetteMultiple(disdettaMultipla);
                     }
-                } catch (Exception e) {
+                } catch (IllegalArgumentException e) {
                     System.err.println("Valore non corretto");
                 }
             }else{
